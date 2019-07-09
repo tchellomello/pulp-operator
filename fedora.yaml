@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pulp-fedora-box
+  namespace: pulp
+spec:
+  resources:
+    requests:
+      storage: 3Gi
+  accessModes:
+  - ReadWriteMany
+---
+## fedora
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pulp-fedora 
+  namespace: pulp
+  labels:
+    app: fedora
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fedora
+  template:
+    metadata:
+      labels:
+        app: fedora
+    spec:
+      volumes:
+      - name: fedora-nfs-data
+        persistentVolumeClaim:
+          claimName: pulp-fedora-box
+      containers:
+        - name: fedora
+          image: tchellomello/fedora:latest
+          imagePullPolicy: Always
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo hello; sleep 10;done"]
+          volumeMounts:
+            - name: fedora-nfs-data
+              mountPath: /root
