@@ -6,7 +6,7 @@
 kubectl apply -f deploy/crds/pulpproject_v1alpha1_pulp_crd.yaml
 kubectl apply -f deploy/crds/pulpproject_v1alpha1_pulp_cr.yaml
 
-kubectl apply -f deploy/service_account.yaml
-kubectl apply -f deploy/role.yaml
-kubectl apply -f deploy/role_binding.yaml
-kubectl apply -f deploy/operator.yaml
+kubectl apply -n pulp -f deploy/service_account.yaml
+kubectl apply -n pulp -f deploy/role.yaml
+kubectl apply -n pulp -f deploy/role_binding.yaml
+kubectl apply -n pulp -f deploy/operator.yaml
