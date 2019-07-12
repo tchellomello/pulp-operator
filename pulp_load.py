@@ -84,7 +84,7 @@ def upload_file_in_chunks(file_path):
 configuration = Configuration()
 configuration.username = 'admin'
 configuration.password = 'password'
-configuration.host = 'http://omg.tatu.home:31599'
+configuration.host = 'http://omg.tatu.home:32120'
 configuration.safe_chars_for_path_param = '/'
 
 core_client = CoreApiClient(configuration)

@@ -29,7 +29,7 @@ spec:
             driver: ceph.rook.io/rook
             fsType: ceph
             options:
-              fsName: myfs
+              fsName: pulp-file-storage
               clusterNamespace: rook-ceph
       containers:
         - name: pulp-content
