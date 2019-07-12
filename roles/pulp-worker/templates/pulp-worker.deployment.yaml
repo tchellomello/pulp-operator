@@ -25,13 +25,12 @@ spec:
               - path: settings.py
                 key: settings.py
         - name: pulp-file-storage
-          persistentVolumeClaim:
-            flexVolume:
-              driver: ceph.rook.io/rook
-              fsType: ceph
-              options:
-                fsName: myfs
-                clusterNamespace: rook-ceph
+          flexVolume:
+            driver: ceph.rook.io/rook
+            fsType: ceph
+            options:
+              fsName: myfs
+              clusterNamespace: rook-ceph
       containers:
         - name: pulp-worker
           image: "{{ registry }}/{{ image }}:{{ version }}"
