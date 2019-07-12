@@ -1,0 +1,3 @@
+pulp-file-client==0.1.0b1.dev1562610070
+pulpcore-client==3.0.0rc4.dev1562606998
+requests
