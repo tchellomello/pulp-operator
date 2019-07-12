@@ -33,7 +33,8 @@ spec:
               clusterNamespace: rook-ceph
       containers:
         - name: pulp-content
-          image: "{{ registry }}/pulp-content:{{ version }}"
+          image: "{{ registry }}/{{ image }}:{{ version }}"
+          command: ["pulp-content"]
           imagePullPolicy: Always
           ports:
             - protocol: TCP

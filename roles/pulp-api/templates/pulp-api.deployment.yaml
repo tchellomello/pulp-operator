@@ -33,7 +33,8 @@ spec:
               clusterNamespace: rook-ceph
       containers:
         - name: pulp-api
-          image: "{{ registry }}/pulp-api:{{ version }}"
+          image: "{{ registry }}/{{ image }}:{{ version }}"
+          command: ["pulp-api"]
           imagePullPolicy: Always
           env:
             # TODO: Replace with k8s secrets

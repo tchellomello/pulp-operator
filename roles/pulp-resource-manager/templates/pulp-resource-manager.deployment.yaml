@@ -33,7 +33,8 @@ spec:
               clusterNamespace: rook-ceph
       containers:
         - name: pulp-resource-manager
-          image: "{{ registry }}/pulp-resource-manager:{{ version }}"
+          image: "{{ registry }}/{{ image }}:{{ version }}"
+          command: ["pulp-resource-manager"]
           volumeMounts:
             - name: pulp-server
               mountPath: "/etc/pulp/"
