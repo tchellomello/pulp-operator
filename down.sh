@@ -1,5 +1,5 @@
 #!/bin/bash
-kubectl delete -f deploy/operator.yaml
+kubectl -n pulp delete -f deploy/operator.yaml
 
 # clean stuff
 kubectl -n pulp delete deployments postgres pulp-api pulp-content pulp-operator pulp-resource-manager pulp-worker redis
