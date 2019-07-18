@@ -1,21 +1,21 @@
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pulp-fedora-box
-  namespace: pulp
-spec:
-  resources:
-    requests:
-      storage: 3Gi
-  accessModes:
-  - ReadWriteMany
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: pulp-fedora-box
+#  namespace: pulp
+#spec:
+#  resources:
+#    requests:
+#      storage: 3Gi
+#  accessModes:
+#  - ReadWriteMany
 ---
-## fedora
+### fedora
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: pulp-fedora 
-  namespace: pulp
+  namespace: rook-ceph
   labels:
     app: fedora
 spec:
@@ -29,15 +29,20 @@ spec:
         app: fedora
     spec:
       volumes:
-      - name: fedora-nfs-data
-        persistentVolumeClaim:
-          claimName: pulp-fedora-box
+      - name: pulp-file-storage
+        flexVolume:
+          driver: ceph.rook.io/rook
+          fsType: ceph
+          options:
+            fsName: pulp-file-storage
+            clusterNamespace: rook-ceph
       containers:
         - name: fedora
-          image: tchellomello/fedora:latest
+          #image: docker.io/tchellomello/fedora:latest
+          image: docker.io/fedora:latest
           imagePullPolicy: Always
           command: ["/bin/sh"]
           args: ["-c", "while true; do echo hello; sleep 10;done"]
           volumeMounts:
-            - name: fedora-nfs-data
-              mountPath: /root
+            - name: pulp-file-storage
+              mountPath: /var/lib/pulp
