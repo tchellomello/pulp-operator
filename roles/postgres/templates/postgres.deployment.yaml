@@ -25,13 +25,13 @@ spec:
               value: pulp
             - name: POSTGRESQL_PASSWORD
               value: pulp
-          #volumeMounts:
-          #  - readOnly: false
-          #    mountPath: /var/lib/pgsql/data
-          #    name: postgres-data
+          volumeMounts:
+            - readOnly: false
+              mountPath: /var/lib/pgsql/data
+              name: postgres-data
           #image: docker.io/tchellomello/postgresql:9.6
           image: docker.io/centos/postgresql-96-centos7:9.6
-    #volumes:
-    #    - name: postgres-data
-    #      persistentVolumeClaim:
-    #        claimName: postgres-data
+    volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
